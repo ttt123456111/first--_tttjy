@@ -1,3 +1,3 @@
 fn main() {
-    println!("Hello, world!");
+    println!("我在虚拟机上运行Rust程序！");
 }
