@@ -1,0 +1,12 @@
+/home/ttt/first--_tttjy/rust-rsa/target/debug/deps/subprocess-02cb9637201bd1e0.d: /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/lib.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/builder.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/communicate.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/popen.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/posix.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/os_common.rs
+
+/home/ttt/first--_tttjy/rust-rsa/target/debug/deps/libsubprocess-02cb9637201bd1e0.rlib: /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/lib.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/builder.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/communicate.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/popen.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/posix.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/os_common.rs
+
+/home/ttt/first--_tttjy/rust-rsa/target/debug/deps/libsubprocess-02cb9637201bd1e0.rmeta: /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/lib.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/builder.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/communicate.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/popen.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/posix.rs /home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/os_common.rs
+
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/lib.rs:
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/builder.rs:
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/communicate.rs:
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/popen.rs:
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/posix.rs:
+/home/ttt/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/subprocess-0.2.15/src/os_common.rs:

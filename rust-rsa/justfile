@@ -1,0 +1,59 @@
+# 显示可用命令
+default:
+    @just --list
+
+# 运行RSA加密测试
+run:
+    cargo run
+
+# 运行并查看数据库结果
+run-db:
+    cargo run
+    @echo ""
+    @echo "📊 查看数据库结果:"
+    @echo "=================="
+    mysql -h 127.0.0.1 -P 3306 -u root -proot123 testdb -e "
+        SELECT 'RSA测试' as 来源, id, original as 原始消息, 
+               LEFT(encrypted, 50) as 加密消息预览, 
+               decrypted as 解密消息, created_at as 创建时间
+        FROM rsa_test 
+        UNION ALL
+        SELECT 'Hello表', id, message, '', message, NOW()
+        FROM hello
+        ORDER BY 来源, id;
+    "
+
+# 清理数据库表
+clean-db:
+    mysql -h 127.0.0.1 -P 3306 -u root -proot123 testdb -e "DROP TABLE IF EXISTS rsa_test;"
+    @echo "✅ rsa_test 表已删除"
+
+# 查看MySQL容器状态
+docker-status:
+    docker ps | grep mysql || echo "MySQL容器未运行"
+    @echo ""
+    @echo "📋 容器日志:"
+    docker logs --tail 20 mysql-test 2>/dev/null || echo "容器不存在"
+
+# 重启MySQL容器
+docker-restart:
+    docker restart mysql-test
+    @echo "✅ MySQL容器已重启"
+    @sleep 3
+    docker ps | grep mysql
+
+# 完整测试（清理旧数据 + 运行 + 查看）
+test: clean-db run-db
+
+# 查看数据库所有表
+show-tables:
+    mysql -h 127.0.0.1 -P 3306 -u root -proot123 testdb -e "SHOW TABLES;"
+
+# 直接查询数据库
+query:
+    mysql -h 127.0.0.1 -P 3306 -u root -proot123 testdb -e "$(QUERY)"
+
+# 备份数据库
+backup:
+    mysqldump -h 127.0.0.1 -P 3306 -u root -proot123 testdb > backup_`date +%Y%m%d_%H%M%S`.sql
+    @echo "✅ 数据库已备份"

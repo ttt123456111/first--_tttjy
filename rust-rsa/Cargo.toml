@@ -1,0 +1,18 @@
+[package]
+name = "rust-rsa"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# RSA加密库
+rsa = "0.9.6"
+# 随机数生成
+rand = "0.8.5"
+# 十六进制编码
+hex = "0.4.3"
+# MySQL数据库驱动
+mysql = "25.0.1"
+# SHA2哈希算法（用于OAEP填充）
+sha2 = "0.10.8"
+# 密钥编码
+pkcs8 = "0.10.2"
