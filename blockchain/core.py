@@ -80,6 +80,16 @@ class Blockchain:
     def add_new_transaction(self, tx: Transaction):
         """接收全网广播的新交易，验证通过后放入交易池"""
         print(f"➡️ 收到新交易 {tx.tx_id}，正在执行全网验证...")
+        
+        # === 防御重放攻击 (Replay Attack) 逻辑 ===
+        # 遍历链上所有区块里的交易，看这个 tx_id 是否已经处理过了
+        for block in self.chain:
+            for existing_tx in block.transactions:
+                if existing_tx.tx_id == tx.tx_id:
+                    print("🛡️ 防御生效：拒绝交易！检测到重放攻击 (交易ID已存在链上)！")
+                    return False
+        
+        # 验证签名有效性
         if tx.is_valid(self.sms):
             self.unconfirmed_transactions.append(tx)
             return True
@@ -99,40 +109,3 @@ class Blockchain:
         # 清空交易池
         self.unconfirmed_transactions = []
         return new_block
-
-# ================= 业务流测试 =================
-if __name__ == "__main__":
-    # 1. 初始化区块链与 SMS 密码系统
-    bc = Blockchain()
-    trapdoor, hk, endorsers = bc.sms.setup_system(num_endorsers=3)
-    endorser_vks = [kp[1] for kp in endorsers]
-    endorser_sks = [kp[0] for kp in endorsers]
-    
-    print("======== 1. 卖家发起数据交易 ========")
-    original_data = "卖家: 张三, 数据集: 10万条带姓名体检报告, 定价: 500 Token"
-    
-    # 背书节点对原始数据签名
-    r_val, agg_sig = bc.sms.sign(original_data, hk, endorser_sks)
-    tx1 = Transaction("TX_1001", original_data, r_val, hk, agg_sig, endorser_vks)
-    print(f"已生成带多重签名的交易。当前内容: '{tx1.payload}'\n")
-    
-    print("======== 2. 监管介入：合规脱敏 (Sanitization) ========")
-    # 监管机构要求隐藏真实姓名才能上链交易
-    sanitized_data = "卖家: ***, 数据集: 10万条[已脱敏]体检报告, 定价: 500 Token"
-    
-    # 执行净化，并留下“操作者指纹”以供追责
-    tx1.sanitize(bc.sms, trapdoor, sanitized_data, operator_id="Data_Regulator_007")
-    print(f"数据已合规脱敏: '{tx1.payload}'")
-    print(f"🕵️ 追责审计日志已生成: {tx1.sanitization_log}\n")
-    
-    print("======== 3. 交易广播与区块链打包 ========")
-    # 模拟将这笔被修改过的交易广播到区块链网络
-    is_accepted = bc.add_new_transaction(tx1)
-    
-    if is_accepted:
-        print("✅ 矿工验证：SMS 签名验证通过！即使数据被改过，原始多方背书依然有效。")
-        new_block = bc.mine()
-        print(f"📦 交易已成功打包至区块高度: {new_block.index}")
-        print(f"🔗 区块哈希: {new_block.hash}")
-    else:
-        print("❌ 交易验证失败，被网络拒绝。")
